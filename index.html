@@ -1,0 +1,298 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+
+<meta name="monitor-signature" content="monitor:player:html5">
+
+ <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+<title>广州稷生科技有限公司</title>
+
+
+
+<link rel="stylesheet" href="style/style.css" />
+
+<link rel="stylesheet" href="style/player.css" />
+
+<link rel="stylesheet" href="style/phoneTemplate.css" />
+
+<script>
+
+//统计代码
+
+var _hmt = _hmt || [];
+
+(function() {
+
+  var hm = document.createElement("script");
+
+  hm.src = "https://hm.baidu.com/hm.js?df5515f86c8722a700d0bf57292e7491";
+
+  var s = document.getElementsByTagName("script")[0]; 
+
+  s.parentNode.insertBefore(hm, s);
+
+})();
+
+</script>
+
+<script src="javascript/jquery-1.9.1.min.js"></script>
+
+<script src="javascript/config.js"></script>
+
+
+
+</head>	
+
+<body>
+
+
+
+<script src="javascript/bookmark_config.js"></script>
+
+<script src="javascript/LoadingJS.js"></script>
+
+
+
+<script src="javascript/main.js?v=lkjh;liy"></script>
+
+
+
+<link rel="stylesheet" href="style/template.css" />
+
+
+
+<script type="text/javascript">
+
+	var sendvisitinfo = function(type,page){};
+
+</script>
+
+<audio autoplay="autoplay" id="music2" loop="loop">
+
+<source src="bg.mp3" type="audio/mpeg">
+
+你的浏览器不支持
+
+</audio>
+
+</body>
+
+
+
+<script src="https://res2.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+
+<script>
+
+var url=location.href.split('#')[0];//定义url
+
+var title='广州商学院2024届毕业生信息指南';
+
+var desc='欢迎广大用人单位录用我校毕业生！';
+
+var thumb='https://oa.gcc.edu.cn/html/zsb/gcc202309/mobile/logo.png';
+
+  $.ajax({
+
+    type : "post",
+
+    url : "https://oa.gcc.edu.cn/index.php?m=weixin&c=jsApi&a=init",//替换网址，xxx根据自己jssdk文件位置修改
+
+	data:{weixinshareUrl:url},
+
+    dataType : "json",
+
+    //jsonp: "callback",
+
+    //jsonpCallback:"success_jsonpCallback",
+
+    success : function(data){
+
+		console.info(data);
+
+        wx.config({
+
+　　　　 appId: data.appId,
+
+　　　　 timestamp: data.timestamp,
+
+　　　　 nonceStr: data.nonceStr,
+
+　　　　 signature: data.signature,
+
+　　　　jsApiList: [
+
+       　　"onMenuShareTimeline", //分享给好友
+
+       　　"onMenuShareAppMessage", //分享到朋友圈
+
+       　　"onMenuShareQQ",  //分享到QQ
+
+       　　"onMenuShareWeibo" //分享到微博
+
+]
+
+});
+
+},
+
+   error:function(data,textStatus){
+
+         //alert(textStatus);
+
+     }
+
+});
+
+</script>   
+
+<script>
+function autoplaygo()
+{
+	document.getElementById('music2').play();
+}
+wx.ready(function () {
+
+//播放背景音乐
+
+setTimeout(function(){autoplaygo();},2000);
+/*document.getElementById('music2').play();*/
+
+  //分享朋友圈
+
+    wx.onMenuShareTimeline({
+
+      title: title,
+
+      link: url,
+
+      imgUrl: thumb
+
+    });
+
+
+
+
+
+	//发送给好友
+
+    wx.onMenuShareAppMessage({
+
+      title: title,
+
+	  desc:desc,
+
+      link: url,
+
+      imgUrl: thumb
+
+    });
+
+
+
+	//发送给QQ好友
+
+    wx.onMenuShareQQ({
+
+      title: title,
+
+	  desc:desc,
+
+      link: url,
+
+      imgUrl: thumb
+
+    });
+
+
+
+	//分享到腾讯微博
+
+    wx.onMenuShareWeibo({
+
+      title: title,
+
+	  desc:desc,
+
+      link: url,
+
+      imgUrl: thumb
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+});
+
+
+
+wx.error(function (res) {
+
+  //alert(res.errMsg);
+
+});
+
+</script>
+<script>
+
+setTimeout(function(){
+　　　　　　　　　//下面的\'getNetworkType\'并不是固定不变的,可以用\'getLocation\'等替代
+　　　　　　　　WeixinJSBridge.invoke('getNetworkType', {}, function (e) { 　　
+　　　　　　　　　　document.querySelector("#audio").play(); 
+　　　　　　　　}); 
+　　　　　　},5000); 
+
+
+
+void function (win, doc, undefined) {
+    // 原理：模拟用户触发播放
+    Audio.prototype._play = Audio.prototype.play;
+    HTMLAudioElement.prototype._play = HTMLAudioElement.prototype.play;
+
+    function wxPlayAudio(audio) {
+        WeixinJSBridge.invoke('getNetworkType', {}, function (e) {
+            audio._play();
+        });
+    }
+
+    function play() {
+        var that = this;
+        that._play();
+        try {
+            wxPlayAudio(that);
+            return;
+        } catch (e) {
+            document.addEventListener("WeixinJSBridgeReady", function(){
+            	 that._play();
+            }, false);
+        }
+    }
+
+    Audio.prototype.play = play;
+    HTMLAudioElement.prototype.play = play;
+}(window, document);
+
+</script>
+</html>
